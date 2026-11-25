@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P Jayasakthi — Portfolio</title>
+  <meta name="description" content="Portfolio of P Jayasakthi - Software Engineer & Web Developer." />
+
+  <!-- Modern Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       WARM PEACH (#ffc6a8) & DEEP CRIMSON (#741a2f) DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-main: #fffaf7;
+      --bg-surface: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.88);
+      --bg-card-hover: rgba(255, 255, 255, 0.98);
+      
+      --accent-burgundy: #741a2f;
+      --accent-peach: #ffc6a8;
+      --accent-peach-dark: #f8a883;
+      
+      --gradient-primary: linear-gradient(135deg, #741a2f 0%, #b83253 100%);
+      --gradient-soft: linear-gradient(135deg, #fff2eb 0%, #ffe3d6 100%);
+      
+      --border-glass: rgba(116, 26, 47, 0.12);
+      --border-glow: rgba(116, 26, 47, 0.35);
+      
+      --text-main: #2b0b13;
+      --text-muted: #5e3b44;
+      --text-dim: #825b64;
+
+      --shadow-sm: 0 4px 15px rgba(116, 26, 47, 0.04);
+      --shadow-md: 0 12px 35px rgba(116, 26, 47, 0.08);
+      --shadow-lg: 0 25px 60px rgba(116, 26, 47, 0.15);
+
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-signature: 'Playfair Display', serif;
+
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 50px;
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Background Glows */
+    .ambient-glow {
+      position: fixed;
+      width: 50vw;
+      height: 50vw;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.45;
+    }
+
+    .glow-1 {
+      top: -10vw;
+      right: -10vw;
+      background: radial-gradient(circle, rgba(255, 198, 168, 0.6) 0%, transparent 70%);
+    }
+
+    .glow-2 {
+      bottom: -10vw;
+      left: -10vw;
+      background: radial-gradient(circle, rgba(116, 26, 47, 0.12) 0%, transparent 70%);
+    }
+
+    /* Scroll Progress Bar */
+    .scroll-progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      z-index: 1001;
+      background: rgba(255, 198, 168, 0.3);
+    }
+
+    .scroll-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-primary);
+      box-shadow: 0 0 10px rgba(116, 26, 47, 0.5);
+    }
+
+    /* Layout & Structure */
+    .container {
+      width: 90%;
+      max-width: 1240px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-md);
+    }
+
+    .gradient-text {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 60px auto;
+    }
+
+    .section-tag {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      color: var(--accent-burgundy);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: inline-block;
+      font-weight: 800;
+      padding: 6px 16px;
+      background: var(--accent-peach);
+      border-radius: var(--radius-xl);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.3rem, 4.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    /* 3D Tilt Cards */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .tilt-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-lg), 0 0 25px rgba(116, 26, 47, 0.12);
+      background: var(--bg-card-hover);
+    }
+
+    /* NAVBAR */
+    .navbar-wrapper {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+      padding: 0 20px;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1280px;
+      padding: 12px 28px;
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 198, 168, 0.5);
+      box-shadow: 0 15px 35px rgba(116, 26, 47, 0.06);
+    }
+
+    /* Elegant Signature Style Logo */
+    .logo {
+      font-family: var(--font-signature);
+      font-size: 1.8rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .logo-accent { 
+      font-family: var(--font-heading);
+      color: var(--accent-burgundy);
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: var(--transition);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-link:hover, .nav-link.active { color: var(--accent-burgundy); }
+
+    .btn-glow-nav {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: var(--radius-xl);
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #fff;
+      background: var(--gradient-primary);
+      box-shadow: 0 6px 20px rgba(116, 26, 47, 0.25);
+      transition: var(--transition);
+    }
+
+    .btn-glow-nav:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(116, 26, 47, 0.4);
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding-top: 140px;
+      position: relative;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-greeting {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      letter-spacing: 4px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero-name {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+
+    .hero-role {
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-weight: 800;
+      color: var(--accent-burgundy);
+      margin-bottom: 18px;
+    }
+
+    .hero-description {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-primary, .btn-secondary, .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: #fff;
+      border: none;
+      box-shadow: 0 10px 25px rgba(116, 26, 47, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(116, 26, 47, 0.38);
+    }
+
+    .btn-secondary {
+      background: var(--accent-peach);
+      color: var(--accent-burgundy);
+      border: 1px solid var(--accent-peach-dark);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background: #ffb894;
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent-burgundy);
+      border: 1.5px solid var(--accent-burgundy);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-burgundy);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    /* Web Dev Side Showcase Box */
+    .hero-side-box {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-peach);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .side-box-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--accent-burgundy);
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 12px;
+    }
+
+    .side-box-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .side-box-item i {
+      color: var(--accent-burgundy);
+      font-size: 1.1rem;
+    }
+
+    /* GRIDS & CARDS */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .card-3d {
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: var(--radius-md);
+      background: var(--accent-peach);
+      border: 1px solid var(--accent-peach-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: var(--accent-burgundy);
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .card-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tag-item {
+      padding: 6px 14px;
+      border-radius: var(--radius-xl);
+      background: var(--accent-peach);
+      border: 1px solid var(--accent-peach-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--accent-burgundy);
+    }
+
+    .btn-project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-burgundy);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      margin-top: auto;
+    }
+
+    .btn-project-link:hover {
+      transform: translateX(5px);
+      color: #b83253;
+    }
+
+    /* Single Large Skill Box */
+    .large-skill-box {
+      padding: 40px;
+      border-radius: var(--radius-lg);
+    }
+
+    .skills-flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .skill-badge-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      background: #ffffff;
+      border: 1.5px solid var(--accent-peach-dark);
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-burgundy);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .skill-badge-large:hover {
+      background: var(--accent-peach);
+      transform: translateY(-3px);
+    }
+
+    /* About Paragraph Lines */
+    .about-content-box p {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.85;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid rgba(116, 26, 47, 0.1);
+      background: #ffffff;
+      padding: 40px 0;
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-container { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Ambient Light Glow -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar-wrapper">
+    <nav class="navbar glass">
+      <a href="#home" class="logo">
+        <span class="logo-accent">&lt;</span>P Jayasakthi<span class="logo-accent"> /&gt;</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#certificates" class="nav-link">Certificates</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <a href="#contact" class="btn-glow-nav">GET IN TOUCH</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <p class="hero-greeting">HELLO, I AM</p>
+          <h1 class="hero-name">P <span class="gradient-text">Jayasakthi</span></h1>
+          <h2 class="hero-role">Web Developer & Software Engineer</h2>
+          <p class="hero-description">
+            Passionate B.Sc Information Technology student engineering high-performance web systems, interactive mobile experiences, and scalable software solutions. Expert in bridging full-stack software development with clean, user-centric visual architectures.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn-primary">
+              <span>VIEW MY WORKS</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#contact" class="btn-secondary">
+              <span>GET IN TOUCH</span>
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="#contact" class="btn-outline">
+              <span>DOWNLOAD RESUME</span>
+              <i class="fa-solid fa-download"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-side-box glass tilt-card">
+          <div class="side-box-header">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>DEVELOPMENT FOCUS</span>
+          </div>
+          <div class="side-box-item"><i class="fa-solid fa-check"></i> Full-Stack Web Development</div>
+          <div class="side-box-item"><i class="fa-solid fa-check"></i> Mobile Application Engineering</div>
+          <div class="side-box-item"><i class="fa-solid fa-check"></i> Python Software Development</div>
+          <div class="side-box-item"><i class="fa-solid fa-check"></i> Relational Database Engineering</div>
+          <div class="side-box-item"><i class="fa-solid fa-check"></i> UI/UX & Responsive Web Architecture</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT SECTION (EXTENDED DETAILED LINES) -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">01. DISCOVER</span>
+          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+        </div>
+
+        <div class="card-3d glass tilt-card about-content-box" style="max-width: 950px; margin: 0 auto;">
+          <h3 class="card-title" style="font-size: 1.6rem; margin-bottom: 16px;">Passionate IT Undergraduate & Full-Stack Developer</h3>
+          
+          <p>
+            I am P Jayasakthi, a dedicated Information Technology undergraduate pursuing my B.Sc degree at The American College, Madurai. My journey in technology is driven by a deep curiosity for understanding how scalable digital platforms, modern web infrastructures, and mobile applications operate under the hood.
+          </p>
+          <p>
+            Over the course of my academic career and hands-on specializations, I have developed a strong analytical foundation in Computer Science fundamentals, Object-Oriented Programming (OOP), Relational Database Management Systems (RDBMS), and Software Architecture.
+          </p>
+          <p>
+            I specialize in full-stack web and mobile application engineering, utilizing modern software toolchains including Python, JavaScript, PHP, React Native, and Expo. I pride myself on writing clean, modular, and maintainable logic that addresses concrete real-world business challenges.
+          </p>
+          <p>
+            In addition to web development, I have completed a rigorous 6-Month Software Engineering program in Python, gaining hands-on expertise in algorithm execution, backend scripting, and database integration. My industrial exposure as a Mobile App Development Intern at Dot Com Infoway allowed me to engineer real-world mobile app UI, optimize cart states with local storage, and refine responsive mobile UX.
+          </p>
+          <p>
+            My goal is to continuously innovate, collaborate with forward-thinking technical teams, and engineer digital solutions that seamlessly connect clean code with exceptional user experiences.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EDUCATION & INTERNSHIP SECTION (COMBINED WITHOUT SCHOOLING) -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">02. ACADEMICS & EXPERIENCE</span>
+          <h2 class="section-title">Education & <span class="gradient-text">Internship</span></h2>
+        </div>
+
+        <div class="grid-cards">
+          <!-- B.Sc IT -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span class="tag-item" style="width: max-content; margin-bottom: 12px;">2024 – 2027</span>
+            <h3 class="card-title">B.Sc Information Technology</h3>
+            <p class="card-text">
+              <strong>The American College, Madurai</strong><br />
+              Current Status: 3rd Year (5th Semester)<br />
+              Aggregate Percentage: <strong>75%</strong>
+            </p>
+          </div>
+
+          <!-- 6 Month Python Course -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-certificate"></i></div>
+            <span class="tag-item" style="width: max-content; margin-bottom: 12px;">6-Month Program</span>
+            <h3 class="card-title">Software Engineering in Python</h3>
+            <p class="card-text">
+              Intensive full-stack software development specialization covering Python syntax, data structures, software architecture, backend logic, and application design fundamentals.
+            </p>
+          </div>
+
+          <!-- Mobile App Internship -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <span class="tag-item" style="width: max-content; margin-bottom: 12px;">Industry Internship</span>
+            <h3 class="card-title">Mobile App Development Intern</h3>
+            <p class="card-text">
+              <strong>Dot Com Infoway, Madurai</strong><br />
+              Engineered responsive mobile app interfaces using React Native and Expo. Implemented dynamic food menu and grocery listings, active cart workflows, and local storage (AsyncStorage) persistence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SKILLS SECTION (COMPREHENSIVE EXPANDED LIST) -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">03. EXPERTISE</span>
+          <h2 class="section-title">Technical <span class="gradient-text">Proficiencies</span></h2>
+        </div>
+
+        <div class="large-skill-box glass tilt-card">
+          <h3 class="card-title" style="font-size: 1.5rem; margin-bottom: 8px;">Technical Skill Set & Stack</h3>
+          <p class="card-text">Comprehensive proficiencies across programming languages, web & mobile engineering, databases, and software tools:</p>
+          
+          <div class="skills-flex-container">
+            <span class="skill-badge-large"><i class="fa-brands fa-python"></i> Python Development</span>
+            <span class="skill-badge-large"><i class="fa-brands fa-js"></i> JavaScript (ES6+)</span>
+            <span class="skill-badge-large"><i class="fa-brands fa-java"></i> Java</span>
+            <span class="skill-badge-large"><i class="fa-brands fa-php"></i> PHP Backend</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-code"></i> C / C++</span>
+            <span class="skill-badge-large"><i class="fa-brands fa-html5"></i> HTML5 Markup</span>
+            <span class="skill-badge-large"><i class="fa-brands fa-css3-alt"></i> CSS3 & 3D Styling</span>
+            <span class="skill-badge-large"><i class="fa-brands fa-react"></i> React Native</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-mobile-screen"></i> Expo Framework</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-database"></i> RDBMS (SQL Querying)</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-globe"></i> Full-Stack Web Development</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-mobile-button"></i> Mobile App Engineering</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-chart-line"></i> Data Analysis Tools</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-wand-magic-sparkles"></i> UI/UX Design Principles</span>
+            <span class="skill-badge-large"><i class="fa-solid fa-laptop-code"></i> VS Code Studio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FEATURED PROJECTS SECTION -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">04. PORTFOLIO</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        </div>
+
+        <div class="grid-cards">
+          <!-- Project 1 -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-drumstick-bite"></i></div>
+            <h3 class="card-title">Freshen Meat</h3>
+            <p class="card-text">
+              Full-featured online chicken and mutton shopping website featuring item category filters, session cart management, and location delivery checking.
+            </p>
+            <div class="tag-list">
+              <span class="tag-item">PHP</span>
+              <span class="tag-item">JavaScript</span>
+              <span class="tag-item">RDBMS</span>
+              <span class="tag-item">HTML/CSS</span>
+            </div>
+            <a href="https://jayasakthi11.github.io/Freshen-Meat/" target="_blank" class="btn-project-link">
+              <span>VIEW PROJECT</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-user-graduate"></i></div>
+            <h3 class="card-title">Smart Fresher Skill Checker</h3>
+            <p class="card-text">
+              Career assessment web tool that helps IT freshers identify missing skills for various IT job roles and provides recommended learning paths.
+            </p>
+            <div class="tag-list">
+              <span class="tag-item">JavaScript</span>
+              <span class="tag-item">Logic Workflow</span>
+              <span class="tag-item">Web App</span>
+            </div>
+            <a href="https://jayasakthi11.github.io/Skill-Checker/" target="_blank" class="btn-project-link">
+              <span>VIEW PROJECT</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            <h3 class="card-title">Grocery Shopping App</h3>
+            <p class="card-text">
+              E-Commerce web application featuring smooth product browsing, catalog search, cart workflows, and mobile-first responsive layout.
+            </p>
+            <div class="tag-list">
+              <span class="tag-item">Web UI</span>
+              <span class="tag-item">JavaScript</span>
+              <span class="tag-item">E-Commerce</span>
+            </div>
+            <a href="#" class="btn-project-link">
+              <span>VIEW PROJECT</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-scissors"></i></div>
+            <h3 class="card-title">Salon Service App</h3>
+            <p class="card-text">
+              Modern service web application built for salon service showcases, online appointment scheduling, and brand presentation.
+            </p>
+            <div class="tag-list">
+              <span class="tag-item">UI/UX Design</span>
+              <span class="tag-item">HTML5/CSS3</span>
+            </div>
+            <a href="#" class="btn-project-link">
+              <span>VIEW PROJECT</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-gem"></i></div>
+            <h3 class="card-title">Diamond Jewellery App</h3>
+            <p class="card-text">
+              Luxury e-commerce showcase featuring high-end visual product presentation and interactive CSS 3D micro-animations.
+            </p>
+            <div class="tag-list">
+              <span class="tag-item">Luxury Layout</span>
+              <span class="tag-item">CSS 3D UI</span>
+            </div>
+            <a href="#" class="btn-project-link">
+              <span>VIEW PROJECT</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CERTIFICATES SECTION -->
+    <section id="certificates" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">05. CREDENTIALS</span>
+          <h2 class="section-title">Certifications & <span class="gradient-text">Training</span></h2>
+        </div>
+
+        <div class="grid-cards">
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h3 class="card-title">Software Engineering in Python</h3>
+            <p class="card-text">
+              Completed 6-Month intensive course covering Python programming, full-stack software development, algorithms, and software architecture.
+            </p>
+          </div>
+
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-award"></i></div>
+            <h3 class="card-title">Web & Mobile Application Specialization</h3>
+            <p class="card-text">
+              Practical mastery in modern JavaScript (ES6+), React Native cross-platform mobile app development, and responsive UI architecture.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SERVICES SECTION (EXPANDED) -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">06. WHAT I OFFER</span>
+          <h2 class="section-title">Technical <span class="gradient-text">Services</span></h2>
+        </div>
+
+        <div class="grid-cards">
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3 class="card-title">Website Development</h3>
+            <p class="card-text">Custom, full-cycle website development with clean architecture, fast page speeds, and pixel-perfect responsiveness.</p>
+          </div>
+
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <h3 class="card-title">Mobile App Development</h3>
+            <p class="card-text">Cross-platform mobile applications engineered with React Native, Expo, and robust local data persistence workflows.</p>
+          </div>
+
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-brands fa-python"></i></div>
+            <h3 class="card-title">Python Solutions</h3>
+            <p class="card-text">Backend development, automation scripts, computational logic, and data processing utilities built using Python.</p>
+          </div>
+
+          <div class="card-3d glass tilt-card">
+            <div class="card-icon"><i class="fa-solid fa-database"></i></div>
+            <h3 class="card-title">Database Engineering</h3>
+            <p class="card-text">Designing relational database schemas (RDBMS), writing optimized SQL queries, and integrating database flows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONTACT SECTION (WITHOUT GITHUB LINK) -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">07. GET IN TOUCH</span>
+          <h2 class="section-title">Contact <span class="gradient-text">Information</span></h2>
+        </div>
+
+        <div class="card-3d glass tilt-card" style="max-width: 700px; margin: 0 auto; text-align: center;">
+          <h3 class="card-title" style="font-size: 1.6rem; margin-bottom: 15px;">P Jayasakthi</h3>
+          <p class="card-text"><i class="fa-solid fa-location-dot" style="color: var(--accent-burgundy);"></i> Madurai, Tamil Nadu, India</p>
+          <p class="card-text"><i class="fa-solid fa-envelope" style="color: var(--accent-burgundy);"></i> jayasakthi952@gmail.com</p>
+          <p class="card-text"><i class="fa-solid fa-phone" style="color: var(--accent-burgundy);"></i> +91 9080739375</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> P Jayasakthi. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      initScrollProgress();
+      init3DTilt();
+    });
+
+    /* Scroll Progress Bar */
+    function initScrollProgress() {
+      const progressBar = document.getElementById('progressBar');
+      window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.scrollY / totalHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    /* 3D Tilt Card Effect */
+    function init3DTilt() {
+      const cards = document.querySelectorAll('.tilt-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          card.style.transform = `perspective(1000px) rotateX(${y * -0.05}deg) rotateY(${x * 0.05}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      });
+    }
+  </script>
+</body>
+</html>
